@@ -13,7 +13,7 @@ lazy val travisCommit = Option(System.getenv().get("TRAVIS_COMMIT"))
 
 lazy val scalaVersionSettings = Seq(
   scalaVersion := "2.12.6",
-  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.13.0-M5", scalaVersion.value),
+  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.13.0-RC1", scalaVersion.value),
   scalaMajorVersion := {
     val v = scalaVersion.value
     CrossVersion.partialVersion(v).map(_._2.toInt).getOrElse {
@@ -141,6 +141,7 @@ lazy val js = project.in(file("js"))
 lazy val jvm = project.in(file("jvm"))
   .settings(sharedSettings: _*)
   .settings(
+    fork in Test := true,
     libraryDependencies += "org.scala-sbt" %  "test-interface" % "1.0"
   )
 
